@@ -11,7 +11,7 @@
 <hr/>
 Mental Illness Prediction Using Machine Learning Algorithm RandomForest. <br/>
 Perform Analysis of Mental illness Data and integrate a machine-learning model into a web Application. 
-< br/>
+<hr/>
 
 ![image](https://github.com/Parag-dwn/Mentalillness_prediction/assets/79037459/25cc8563-797d-4dae-aada-ae1094fe3b0f)
 
