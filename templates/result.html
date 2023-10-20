@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+
+{% block base %}
+
+
+
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/css/style1.css">
+    </head>
+<body>
+    <div id="adiprag wrapper"> <!--login-form-container --> 
+        <div class="card" style="width: 400px">
+            <div class="card-content">
+                <div class="media">
+                    <div class="is-size-4 has-text-centered">
+                        {{ prediction }}
+                    </div>
+                </div>
+                <form action="service">
+                    <div class="field">
+                        <button class="button is-fullwidth is-rounded is-success">Retry</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock base %}
