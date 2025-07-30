@@ -1,32 +1,52 @@
-{% extends 'base.html' %}
-
-
-
-{% block base %}
-
-
-
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="/static/css/style1.css">
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+</head>
 <body>
-    <div id="adiprag wrapper"> <!--login-form-container --> 
-        <div class="card" style="width: 400px">
-            <div class="card-content">
-                <div class="media">
-                    <div class="is-size-4 has-text-centered">
-                        {{ prediction }}
-                    </div>
-                </div>
-                <form action="service">
-                    <div class="field">
-                        <button class="button is-fullwidth is-rounded is-success">Retry</button>
-                    </div>
-                </form>
+    <div class="container">
+        <div class="media">
+            <div class="is-size-4 has-text-centered">
+                {{ prediction }}
             </div>
         </div>
+        <form action="service">
+            <div class="field">
+                <button class="button is-fullwidth is-rounded is-success">Retry</button>
+            </div>
+        </form>
+
+        <!-- Quote Section -->
+        <div id="quote" style="margin-top: 20px; font-size: 1.2em; text-align: center;">
+            {{ random_quote }}
+        </div>
     </div>
+
+    <script>
+        // If you want to keep the JavaScript functionality to display a random quote,
+        // you can uncomment the following code. However, since we are passing a random quote
+        // from the Flask backend, this is not necessary.
+
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     const quotes = [
+        //         "The only limit to our realization of tomorrow is our doubts of today.",
+        //         "The future belongs to those who believe in the beauty of their dreams.",
+        //         "Do not wait to strike till the iron is hot, but make it hot by striking.",
+        //         "Success is not how high you have climbed, but how you make a positive difference to the world.",
+        //         "What lies behind us and what lies before us are tiny matters compared to what lies within us."
+        //     ];
+
+        //     function displayRandomQuote() {
+        //         const randomIndex = Math.floor(Math.random() * quotes.length);
+        //         const randomQuote = quotes[randomIndex];
+        //         document.getElementById('quote').innerText = randomQuote;
+        //     }
+
+        //     displayRandomQuote();
+        // });
+    </script>
 </body>
 </html>
-{% endblock base %}

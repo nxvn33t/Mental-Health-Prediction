@@ -14,6 +14,13 @@
 <meta name="description" content="">
 <meta name="author" content=""> 
 <!-- bootstrap css -->
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.bundle.min.js"></script>
+<script src="/static/js/popper.min.js"></script>
+<script src="/static/js/custom.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
 <!-- style css -->
 <link rel="stylesheet" type="text/css" href="/static/css/style.css">
@@ -43,7 +50,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto" style="margin: 0 0 0 200px; display: flex; justify-content: center;">
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('home') }}">Home</a>
               </li>
@@ -56,9 +63,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('team') }}">Team</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('Contact') }}">Contact Us</a>
-              </li>
+              
             </ul>
           </div>
         </nav>

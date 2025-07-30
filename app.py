@@ -81,40 +81,50 @@ def team():
     return render_template('team.html')
     
 def ValuePredictor(to_predict_list):
-    to_predict = (to_predict_list)
-    loaded_model = pickle.load(open("model.pkl", "rb"))
-    result = loaded_model.predict(to_predict)
-    return result[0]
+    # Extract related symptom scores
+    lack_of_concentration = to_predict_list[17]
+    anxiety = to_predict_list[18]
+    depression = to_predict_list[19]
+    obsessive_thinking = to_predict_list[20]
+    mood_swings = to_predict_list[21]
+    panic_attacks = to_predict_list[22]
+    compulsive_behavior = to_predict_list[23]
 
-@app.route('/result1', methods = ['POST'])
+    # Calculate scores properly
+    depression_score = lack_of_concentration + depression
+    anxiety_score = anxiety + depression + obsessive_thinking + mood_swings
+    ocd_score = panic_attacks + compulsive_behavior
 
+    # Check minimum threshold
+    if depression_score >= 2 and depression_score >= anxiety_score and depression_score >= ocd_score:
+        return "Depression"
+    elif anxiety_score >= 2 and anxiety_score >= depression_score and anxiety_score >= ocd_score:
+        return "Anxiety"
+    elif ocd_score >= 2 and ocd_score >= depression_score and ocd_score >= anxiety_score:
+        return "Obsessive-Compulsive Disorder (OCD)"
+    else:
+        return "You seem mentally healthy"
+
+
+
+@app.route('/result1', methods=['POST'])
 def result():
-    if request.method =='POST':
-        
+    if request.method == 'POST':
         to_predict_list = request.form.to_dict()
-        
         to_predict_list = list(to_predict_list.values())
         to_predict_list = list(map(int, to_predict_list))
-        to_predict_list = list(map(int, to_predict_list))
-        #print(to_predict_list)
-        r=to_predict_list
-        for i in range(len(r)):
-            r[i]=int(r[i])
-        
 
+        result = ValuePredictor(to_predict_list)  # Get illness type
 
-        result = ValuePredictor([to_predict_list]) 
-        data_lst=student(q1=r[0],q2=r[1],q3=r[2],q4=r[3],q5=r[4],q6=r[5],q7=r[6],q8=r[7],q9=r[8],q10=r[9],q11=r[10],q12=r[11],q13=r[12],q14=r[13],q15=r[14],q16=r[15],q17=r[16],q18=r[17],q19=r[18],q20=r[19],q21=r[20],q22=r[21],q23=r[22],q24=r[23],q25=r[24],q26=r[25],q27=r[26],prediction=result) 
-        print(data_lst) 
-        db.session.add(data_lst)    
-        db.session.commit()
-        if int(result)== 1:
-            prediction ='Prediction shows that you are  mentaly Ill'
+        if result == "You seem mentally healthy":
+            tips = "Tips: Go to the gym, dance, listen to music, wake up early, eat healthy, and stay social! 😊"
+            message = f"Congratulations! You don't show significant signs of mental illness. {tips}"
         else:
-            prediction ='Prediction shows that your are fine'           
-        return render_template("result1.html", prediction = prediction)
-    else:
-        return render_template("home.html")
+            tips = "Suggestion: Please consult a mental health professional. Meanwhile, practice mindfulness, maintain a daily routine, stay connected with loved ones, and avoid self-isolation."
+            message = f'You may have {result}. {tips}'
+
+        return render_template("result1.html", prediction=message)
+
 @app.route('/Contact')
 def Contact():
     return render_template('Contact.html')
